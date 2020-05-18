@@ -34,7 +34,7 @@ public class Details extends AppCompatActivity {
         items_class item   = ( items_class ) intent.getSerializableExtra ( "selected_item" );
 
         new MyTask ().execute ( item );
-
+        System.err.println ("oday awad" );
     }
 
 
@@ -49,22 +49,19 @@ public class Details extends AppCompatActivity {
         @Override
         protected SectionsPagerAdapter doInBackground ( items_class... strings ) {
 
-            SectionsPagerAdapter sectionsPagerAdapter =
-                    new SectionsPagerAdapter ( getBaseContext () , getSupportFragmentManager ( ) , strings[0] ,
-                                               new OnItemsRecyclerViewClickListener ( ) {
-                                                   @Override
-                                                   public void onItemClick ( String id ) {
-                                                       openSectionActivity ( id );
-                                                   }
 
-                                                   @Override
-                                                   public void onItemClick ( items_class selected_item ) {
+            return new SectionsPagerAdapter ( getBaseContext () , getSupportFragmentManager ( ) , strings[0] ,
+                                      new OnItemsRecyclerViewClickListener ( ) {
+                                           @Override
+                                           public void onItemClick ( String id ) {
+                                               openSectionActivity ( id );
+                                           }
 
-                                                   }
-                                               } );
+                                           @Override
+                                           public void onItemClick ( items_class selected_item ) {
 
-
-            return sectionsPagerAdapter;
+                                           }
+                                       } );
         }
 
         @Override
