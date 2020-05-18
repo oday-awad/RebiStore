@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#0074D9</item>
+        <item name="colorPrimaryDark">#016AC5</item>
+        <item name="colorAccent">#42A5F5</item>
+    </style>
+
+
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--<style name="Button">-->
+    <!--<item name="android:textColor">#FFFFFF</item>-->
+    <!--<item name="android:padding">0dp</item>-->
+    <!--<item name="android:minWidth">88dp</item>-->
+    <!--<item name="android:minHeight">36dp</item>-->
+    <!--<item name="android:layout_margin">3dp</item>-->
+    <!--<item name="android:elevation">1dp</item>-->
+    <!--<item name="android:translationZ">1dp</item>-->
+    <!--<item name="android:background">@drawable/primary_round</item>-->
+    <!--</style>-->
+</resources>

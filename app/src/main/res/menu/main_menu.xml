@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item_schema-->
+    <!--android:id="@+id/action_settings"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/action_settings"-->
+    <!--app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/action_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+    <!--<item-->
+    <!--android:id="@+id/action_notifications"-->
+    <!--android:icon="@drawable/ic_notifications"-->
+    <!--android:title="@string/notifications"-->
+    <!--app:actionLayout="@layout/notifications_item"-->
+    <!--app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/action_notifications"
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/notifications"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_Main"
+        android:icon="@drawable/ic_main"
+        android:title="@string/Main"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_cart"
+        android:title="@string/cart"
+        app:showAsAction="always" />
+
+</menu>
