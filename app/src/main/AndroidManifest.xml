@@ -11,16 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.Sections"></activity>
+        <activity
+            android:name=".activities.Sections"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize" />
         <activity
             android:name=".activities.Details"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.Main"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SplashScreen"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
