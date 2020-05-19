@@ -20,17 +20,42 @@ public class itemsAsyncTask extends AsyncTask < String, ArrayList < items_class 
             { R.drawable.car , R.drawable.shopping , R.drawable.image1 };
     private        OnItemsRecyclerViewClickListener listener;
     private        RecyclerView                     rv_items;
+    ArrayList < items_class > itemsArrayList = new ArrayList <> ( );
+    ItemsRecyclerAdapter itemsRecyclerAdapter ;
 
     public itemsAsyncTask ( RecyclerView rv_items , OnItemsRecyclerViewClickListener listener ) {
         this.listener = listener;
         this.rv_items = rv_items;
     }
 
+    @Override
+    protected void onPreExecute ( ) {
+        super.onPreExecute ( );
+
+         itemsRecyclerAdapter =
+                new ItemsRecyclerAdapter ( itemsArrayList , R.layout.item_schema ,
+                                           new OnItemsRecyclerViewClickListener ( ) {
+                                               @Override
+                                               public void onItemClick ( String id ) { }
+
+                                               @Override
+                                               public void onItemClick ( items_class item ) {
+                                                   listener.onItemClick ( item );
+                                               }
+                                           } );
+
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager ( 1 , 0 );
+
+        rv_items.setHasFixedSize ( true );
+        rv_items.setLayoutManager ( layoutManager );
+        rv_items.setAdapter ( itemsRecyclerAdapter );
+
+    }
 
     @Override
     protected ArrayList < items_class > doInBackground ( String... strings ) {
         String id = strings[ 0 ];
-        return getData ( id );
+        return getData ( id ,itemsArrayList);
     }
 
 
@@ -39,24 +64,25 @@ public class itemsAsyncTask extends AsyncTask < String, ArrayList < items_class 
 
         //Start RecyclerView And The Adapter
 
-        ItemsRecyclerAdapter itemsRecyclerAdapter =
-                new ItemsRecyclerAdapter ( items_ArrayList , R.layout.item_schema ,
-                                           new OnItemsRecyclerViewClickListener ( ) {
-                    @Override
-                    public void onItemClick ( String id ) { }
+//        ItemsRecyclerAdapter itemsRecyclerAdapter =
+//                new ItemsRecyclerAdapter ( items_ArrayList , R.layout.item_schema ,
+//                                           new OnItemsRecyclerViewClickListener ( ) {
+//                    @Override
+//                    public void onItemClick ( String id ) { }
+//
+//                    @Override
+//                    public void onItemClick ( items_class item ) {
+//                        listener.onItemClick ( item );
+//                    }
+//                } );
+//
+//        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager ( 1 , 0 );
+//
+//        rv_items.setHasFixedSize ( true );
+//        rv_items.setLayoutManager ( layoutManager );
+//        rv_items.setAdapter ( itemsRecyclerAdapter );
 
-                    @Override
-                    public void onItemClick ( items_class item ) {
-                        listener.onItemClick ( item );
-                    }
-                } );
-
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager ( 1 , 0 );
-
-        rv_items.setHasFixedSize ( true );
-        rv_items.setLayoutManager ( layoutManager );
-        rv_items.setAdapter ( itemsRecyclerAdapter );
-
+        itemsRecyclerAdapter.notifyDataSetChanged ();
 
         //End RecyclerView And The Adapter
 
@@ -64,7 +90,7 @@ public class itemsAsyncTask extends AsyncTask < String, ArrayList < items_class 
         super.onPostExecute ( items_ArrayList );
     }
 
-    public ArrayList < items_class > getData ( String id ) {
+    private ArrayList < items_class > getData ( String id ,ArrayList < items_class > itemsArrayList) {
         String desc =
                 "Lorem ipsum dolor sit amet consectetur elit. Aliquam asperiores commodi " +
                 "debitis " + "dolores eum excepturi magni mollitia, quaerat, quibusdam quos" + " "
@@ -76,7 +102,6 @@ public class itemsAsyncTask extends AsyncTask < String, ArrayList < items_class 
 
         Random rand = new Random ( );
 
-        ArrayList < items_class > itemsArrayList = new ArrayList <> ( );
 
         itemsArrayList.add ( new items_class ( "1" , "black BMW 2020" , 21000f , true , desc ,
                                                IMAGES[ rand.nextInt ( IMAGES.length ) ].toString ( ) , 0 , id , "BMW" , IMAGES[ rand.nextInt ( IMAGES.length ) ] ) );

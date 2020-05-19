@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import net.rebi.estore.AsyncTask.SectionsAsyncTask;
@@ -17,8 +18,10 @@ import net.rebi.estore.R;
 import net.rebi.estore.adapters.SectionsRecyclerAdapter;
 import net.rebi.estore.adapters.ViewPagerAdapter;
 import net.rebi.estore.classes.items_class;
+import net.rebi.estore.classes.sections_class;
 import net.rebi.estore.others.SliderTimer;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 
@@ -55,7 +58,7 @@ public class MainFragment extends Fragment {
 
 
         //Start Getting data
-        SectionsAsyncTask myTask =
+        SectionsAsyncTask sectionsAsyncTask =
                 new SectionsAsyncTask ( getContext ( ) , sectionsRecyclerAdapter , rv_sections ,
                                         progressBar , new OnItemsRecyclerViewClickListener ( ) {
                     @Override
@@ -65,12 +68,11 @@ public class MainFragment extends Fragment {
 
                     @Override
                     public void onItemClick ( items_class selected_item ) {
-                        System.err.println ("  -     1      -   " );
                         listener.onItemClick ( selected_item );
 
                     }
                 } );
-        myTask.execute ( );
+        sectionsAsyncTask.execute ( );
         //End Getting data
 
 

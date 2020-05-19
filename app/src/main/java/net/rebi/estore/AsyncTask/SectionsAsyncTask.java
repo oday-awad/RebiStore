@@ -16,9 +16,10 @@ import net.rebi.estore.classes.sections_class;
 import java.util.ArrayList;
 
 
-public class SectionsAsyncTask extends AsyncTask < String, ArrayList < sections_class >,
-        ArrayList < sections_class > > {
+public class SectionsAsyncTask extends AsyncTask < ArrayList < sections_class >,
+        ArrayList < sections_class >, ArrayList < sections_class > > {
 
+    ArrayList < sections_class > sections_arrayList = new ArrayList <> ( );
     private OnItemsRecyclerViewClickListener listener;
     private Context                          context;
     private SectionsRecyclerAdapter          sectionsRecyclerAdapter;
@@ -40,33 +41,6 @@ public class SectionsAsyncTask extends AsyncTask < String, ArrayList < sections_
     @Override
     protected void onPreExecute ( ) {
         super.onPreExecute ( );
-    }
-
-    @Override
-    protected ArrayList < sections_class > doInBackground ( String... strings ) {
-
-        try {
-            Thread.sleep ( 1000 );
-        }
-        catch ( InterruptedException e ) {
-            e.printStackTrace ( );
-        }
-
-        //Start Getting data
-        ArrayList < sections_class > sections_arrayList = new ArrayList <> ( );
-        sections_arrayList.add ( new sections_class ( "1" , "وصلنا حديثاً" ) );
-        sections_arrayList.add ( new sections_class ( "2" , "عروض مميزة" ) );
-        sections_arrayList.add ( new sections_class ( "3" , "التخفيضات والعروض" ) );
-        sections_arrayList.add ( new sections_class ( "4" , "الأطفال و الألعاب" ) );
-        sections_arrayList.add ( new sections_class ( "5" , "الإلكترونيات والأجهزة المنزلية" ) );
-        sections_arrayList.add ( new sections_class ( "6" , "الصحة والجمال" ) );
-        sections_arrayList.add ( new sections_class ( "7" , "المكتبة" ) );
-        sections_arrayList.add ( new sections_class ( "8" , "المنزل" ) );
-        sections_arrayList.add ( new sections_class ( "9" , "الهواتف والتابليت وملحقاتها" ) );
-        sections_arrayList.add ( new sections_class ( "10" , "سوبر ماركت" ) );
-        sections_arrayList.add ( new sections_class ( "11" , "فاشن" ) );
-        sections_arrayList.add ( new sections_class ( "12" , "توصيل مجاني" ) );
-        //End Getting data
 
 
         sectionsRecyclerAdapter =
@@ -83,40 +57,69 @@ public class SectionsAsyncTask extends AsyncTask < String, ArrayList < sections_
                 } );
 
 
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager ( 1 , 1 );
+        rv_sections.setHasFixedSize ( true );
+        rv_sections.setLayoutManager ( layoutManager );
+        rv_sections.setAdapter ( sectionsRecyclerAdapter );
+
+
+    }
+
+    @Override
+    protected ArrayList < sections_class > doInBackground ( ArrayList < sections_class >... strings ) {
+
+        try {
+            Thread.sleep ( 1000 );
+        }
+        catch ( InterruptedException e ) {
+            e.printStackTrace ( );
+        }
+
+        //Start Getting data
+        sections_arrayList.add ( new sections_class ( "1" , "وصلنا حديثاً" ) );
+        sections_arrayList.add ( new sections_class ( "2" , "عروض مميزة" ) );
+        sections_arrayList.add ( new sections_class ( "3" , "التخفيضات والعروض" ) );
+        sections_arrayList.add ( new sections_class ( "4" , "الأطفال و الألعاب" ) );
+        sections_arrayList.add ( new sections_class ( "5" , "الإلكترونيات والأجهزة المنزلية" ) );
+        sections_arrayList.add ( new sections_class ( "6" , "الصحة والجمال" ) );
+        sections_arrayList.add ( new sections_class ( "7" , "المكتبة" ) );
+        sections_arrayList.add ( new sections_class ( "8" , "المنزل" ) );
+        sections_arrayList.add ( new sections_class ( "9" , "الهواتف والتابليت وملحقاتها" ) );
+        sections_arrayList.add ( new sections_class ( "10" , "سوبر ماركت" ) );
+        sections_arrayList.add ( new sections_class ( "11" , "فاشن" ) );
+        sections_arrayList.add ( new sections_class ( "12" , "توصيل مجاني" ) );
+        //End Getting data
+
+
+        //        sectionsRecyclerAdapter =
+        //                new SectionsRecyclerAdapter ( sections_arrayList , context ,
+        //                                              new OnItemsRecyclerViewClickListener ( ) {
+        //                    @Override
+        //                    public void onItemClick ( String id ) {listener.onItemClick ( id ); }
+        //
+        //                    @Override
+        //                    public void onItemClick ( items_class selected_item ) {
+        //                        listener.onItemClick ( selected_item );
+        //
+        //                    }
+        //                } );
+
+
         return sections_arrayList;
     }
 
     @Override
     protected void onPostExecute ( ArrayList < sections_class > sections_arrayList ) {
 
-        //Start RecyclerView And The Adapter
-        //            SectionsRecyclerAdapter =
-        //                    new SectionsRecyclerAdapter ( sections_arrayList , getContext ( ) ,
-        //                                                  new OnItemsRecyclerViewClickListener
-        //                                                  ( ) {
-        //                                                      @Override
-        //                                                      public void onItemClick ( String
-        //                                                      id ) {listener.onItemClick ( id ); }
-        //
-        //                                                      @Override
-        //                                                      public void onItemClick (
-        //                                                      items_class selected_item ) {
-        //                                                          Intent intent = new Intent (
-        //                                                          getContext ( ) , Details
-        //                                                          .class );
-        //                                                          intent.putExtra (
-        //                                                          "selected_item" ,
-        //                                                          selected_item );
-        //                                                          startActivity ( intent );
-        //                                                      }
-        //                                                  } );
 
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager ( 1 , 1 );
-        rv_sections.setHasFixedSize ( true );
-        rv_sections.setLayoutManager ( layoutManager );
-        rv_sections.setAdapter ( sectionsRecyclerAdapter );
+        //        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager ( 1 ,
+        //        1 );
+        //        rv_sections.setHasFixedSize ( true );
+        //        rv_sections.setLayoutManager ( layoutManager );
+        //        rv_sections.setAdapter ( sectionsRecyclerAdapter );
         //End RecyclerView And The Adapter
 
+        sectionsRecyclerAdapter.notifyDataSetChanged ( );
 
         progressBar.setVisibility ( View.GONE );
         super.onPostExecute ( sections_arrayList );
